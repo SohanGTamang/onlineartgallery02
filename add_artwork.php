@@ -1,18 +1,18 @@
 <?php
-// Include your database connection
+
 require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form data
+    
     $title = htmlspecialchars($_POST['title']);
     $description = htmlspecialchars($_POST['description']);
     $price = $_POST['price'];
 
-    // Handle image upload
+    
     $imagePath = 'uploads/' . basename($_FILES['image']['name']);
     move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
 
-    // Insert artwork into the database
+   
     $query = "INSERT INTO artworks (title, description, price, image_path) VALUES (:title, :description, :price, :image_path)";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':title', $title);
